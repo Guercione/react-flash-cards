@@ -30,10 +30,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Score = ({ answeres, handleResetWords }) => {
+const Score = ({ words, answeredWords, handleResetWords }) => {
   const classes = useStyles();
-
-  const right = answeres.filter(item => item[2] === "right").length;
+  const right = answeredWords.filter(item => item[2] === "right").length;
+  const progress = (100 * right) / words.length;
 
   return (
     <Grid
@@ -43,10 +43,10 @@ const Score = ({ answeres, handleResetWords }) => {
       alignContent="center"
     >
       <Typography variant="h5" className={classes.title}>
-        {right * 5}% of hit ratio
+        {progress.toFixed(2)}% of hit ratio
       </Typography>
       <Typography variant="h6" className={classes.error}>
-        Wrong: {20 - right}
+        Wrong: {words.length - right}
       </Typography>
       <Typography variant="h6" className={classes.seccess}>
         Correct: {right}

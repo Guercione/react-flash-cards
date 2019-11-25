@@ -33,7 +33,7 @@ const WordInput = ({ card, currentCard, onSubmit }) => {
               ? "right"
               : "wrong"
           ]
-        : []
+        : [card[currentCard][0], "", "wrong"]
     );
   };
 

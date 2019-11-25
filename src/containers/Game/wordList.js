@@ -36,8 +36,9 @@ const typographyComponent = (ref, item, type = "", currentWord) => {
       }}
     >
       {item && item.length === 0 && `${ref + 1}. ???? - ????`}
-      {item && item.length > 0 && `${ref + 1}. ${item[0]} - ${item[1]}`}
-      {!item && `${ref + 1}. SKIPED`}
+      {item &&
+        item.length > 0 &&
+        `${ref + 1}. ${item[0]} - ${item[1] || "SKIPED"}`}
     </Typography>
   );
 };
@@ -45,7 +46,11 @@ const typographyComponent = (ref, item, type = "", currentWord) => {
 const WordList = ({ words, answeredWords }) => {
   const renderList = React.useMemo(() => {
     return words.map((item, key) => {
-      if (answeredWords && answeredWords[key] && answeredWords.length === 20) {
+      if (
+        answeredWords &&
+        answeredWords[key] &&
+        words.length === answeredWords.length
+      ) {
         if (answeredWords[key][2] === "right")
           return typographyComponent(key, answeredWords[key], "success");
 

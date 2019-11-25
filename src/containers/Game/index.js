@@ -76,7 +76,8 @@ const Game = ({ card, cardItems }) => {
           {answeredWords.length === words.length ||
           answeredWords.length === 20 ? (
             <Score
-              answeres={answeredWords}
+              words={words}
+              answeredWords={answeredWords}
               handleResetWords={handleResetWords}
             />
           ) : (
