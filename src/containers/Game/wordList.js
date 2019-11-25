@@ -15,13 +15,23 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const typographyComponent = (ref, item, type = "", currentWord) => {
+const typographyComponent = (ref, item, type = "", correctWord) => {
   const color = (function() {
-    if (type === "error") return error;
+    if (type === "error" || type === "wrong" || type === "skipped")
+      return error;
     if (type === "warning") return warning;
-    if (type === "success") return success;
+    if (type === "success" || type === "right") return success;
 
     return grey;
+  })();
+
+  const text = (function() {
+    if (item && item.length === 0) return `${ref + 1}. ???? - ????`;
+    if (item && item[1]) return `${ref + 1}. ${item[0]} - ${item[1]}`;
+    if (item && correctWord)
+      return `${ref + 1}. ${item[0]} - ${correctWord[1]} - SKIPPED`;
+
+    return `${ref + 1}. ${item[0]} - ${item[1] || "SKIPPED"}`;
   })();
 
   return (
@@ -35,10 +45,7 @@ const typographyComponent = (ref, item, type = "", currentWord) => {
         maxWidth: 200
       }}
     >
-      {item && item.length === 0 && `${ref + 1}. ???? - ????`}
-      {item &&
-        item.length > 0 &&
-        `${ref + 1}. ${item[0]} - ${item[1] || "SKIPED"}`}
+      {text}
     </Typography>
   );
 };
@@ -51,11 +58,12 @@ const WordList = ({ words, answeredWords }) => {
         answeredWords[key] &&
         words.length === answeredWords.length
       ) {
-        if (answeredWords[key][2] === "right")
-          return typographyComponent(key, answeredWords[key], "success");
-
-        if (answeredWords[key][2] === "wrong")
-          return typographyComponent(key, answeredWords[key], "error");
+        return typographyComponent(
+          key,
+          answeredWords[key],
+          answeredWords[key][2],
+          item
+        );
       }
 
       if (answeredWords[key] && answeredWords[key].length)

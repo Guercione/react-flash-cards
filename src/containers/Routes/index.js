@@ -14,6 +14,7 @@ import {
 import Header from "../Header";
 import Grid from "@material-ui/core/Grid";
 import Loading from "../../components/Loading";
+import GeneralError from "../Errors/generalError";
 import { primary, secondary, grey } from "../../components/color";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
@@ -21,7 +22,7 @@ import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 function loading({ error }) {
   if (error) {
     console.error(error);
-    return "Error!";
+    return "Error on load bundle";
   } else {
     return (
       <Grid container direction="row" justify="center" alignItems="center">
@@ -84,23 +85,25 @@ const PrivateRoute = ({ condition, component, ...rest }) => {
 
 const Routes = ({ selectedCard }) => (
   <MuiThemeProvider theme={theme}>
-    <Router>
-      <Header />
-      <Grid container justify="center">
-        <Grid style={{ maxWidth: 1000, padding: "1em" }}>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <PrivateRoute
-              exact
-              path="/game"
-              condition={selectedCard !== undefined}
-              component={Game}
-            />
-            <Route component={Error404} />
-          </Switch>
+    <GeneralError>
+      <Router>
+        <Header />
+        <Grid container justify="center">
+          <Grid style={{ maxWidth: 1000, padding: "1em" }}>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <PrivateRoute
+                exact
+                path="/game"
+                condition={selectedCard !== undefined}
+                component={Game}
+              />
+              <Route component={Error404} />
+            </Switch>
+          </Grid>
         </Grid>
-      </Grid>
-    </Router>
+      </Router>
+    </GeneralError>
   </MuiThemeProvider>
 );
 

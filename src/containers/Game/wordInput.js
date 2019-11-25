@@ -23,18 +23,19 @@ const WordInput = ({ card, currentCard, onSubmit }) => {
   const { buttons } = useStyles();
 
   const handleSubmit = () => {
+    const userInput = (function() {
+      if (!state.input || !card[currentCard] || !card[currentCard][0])
+        return "skipped";
+
+      if (card[currentCard][1].toLowerCase() === state.input.toLowerCase()) {
+        return "right";
+      }
+
+      return "wrong";
+    })();
+
     setState({ input: "" });
-    onSubmit(
-      state.input && card[currentCard] && card[currentCard][0]
-        ? [
-            card[currentCard][0],
-            state.input,
-            card[currentCard][1].toLowerCase() === state.input.toLowerCase()
-              ? "right"
-              : "wrong"
-          ]
-        : [card[currentCard][0], "", "wrong"]
-    );
+    onSubmit([card[currentCard][0], state.input || "", userInput]);
   };
 
   return (
