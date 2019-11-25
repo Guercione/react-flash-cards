@@ -42,6 +42,11 @@ const Game = Loadable({
   loading: loading
 });
 
+const NewList = Loadable({
+  loader: () => import("../NewList"),
+  loading: loading
+});
+
 const Error404 = Loadable({
   loader: () => import("../Errors/error404"),
   loading: loading
@@ -85,13 +90,14 @@ const PrivateRoute = ({ condition, component, ...rest }) => {
 
 const Routes = ({ selectedCard }) => (
   <MuiThemeProvider theme={theme}>
-    <GeneralError>
       <Router>
+    <GeneralError>
         <Header />
         <Grid container justify="center">
           <Grid style={{ maxWidth: 1000, padding: "1em" }}>
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route exact path="/new-list" component={NewList} />
               <PrivateRoute
                 exact
                 path="/game"
@@ -102,8 +108,8 @@ const Routes = ({ selectedCard }) => (
             </Switch>
           </Grid>
         </Grid>
-      </Router>
     </GeneralError>
+      </Router>
   </MuiThemeProvider>
 );
 

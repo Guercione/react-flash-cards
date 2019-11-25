@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 // COMPONENTS
 import Fab from "@material-ui/core/Fab";
+import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import AddBoxIcon from "@material-ui/icons/AddBox";
@@ -32,16 +32,18 @@ const Header = () => {
             SITEJET CODE
           </Link>
         </Typography>
-        <Fab
-          edge="end"
-          variant="extended"
-          color="secondary"
-          aria-label="add"
-          className={classes.fab}
-        >
-          <AddBoxIcon className={classes.icon} />
-          <Typography variant="body2">New List</Typography>
-        </Fab>
+        <Link to="/new-list" className={classes.link}>
+          <Fab
+            edge="end"
+            variant="extended"
+            color="secondary"
+            aria-label="add"
+            className={classes.fab}
+          >
+            <AddBoxIcon className={classes.icon} />
+            <Typography variant="body2">New List</Typography>
+          </Fab>
+        </Link>
       </Toolbar>
     </AppBar>
   );

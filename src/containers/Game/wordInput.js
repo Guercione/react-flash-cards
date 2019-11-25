@@ -58,7 +58,7 @@ const WordInput = ({ card, currentCard, onSubmit }) => {
       />
       <Grid container className={buttons}>
         <Button
-          onClick={() => onSubmit([])}
+          onClick={handleSubmit}
           style={{ backgroundColor: error, marginTop: 10 }}
         >
           Skip
