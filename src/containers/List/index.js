@@ -54,14 +54,13 @@ const List = ({
 
   const classes = useStyles();
 
-  const handleDelete = () => {
+  const handleDelete = function() {
     setListDeleteCard(selectedCard);
     setredirectToHome(true);
   };
 
   const handleSubmit = () => {
     let flag = false;
-    const arr = list;
 
     if (!title.value) return setTitle({ ...title, error: true });
     if (!description.value)
@@ -70,7 +69,7 @@ const List = ({
     list.map((item, key) => {
       if (!item.word1 || !item.word2) {
         flag = true;
-        arr[key] = { ...arr[key], error: true };
+        list[key] = { ...list[key], error: true };
       }
     });
 

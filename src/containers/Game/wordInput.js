@@ -22,9 +22,9 @@ const WordInput = ({ card, currentCard, onSubmit }) => {
   const [state, setState] = React.useState({ input: "" });
   const { buttons } = useStyles();
 
-  const handleSubmit = () => {
+  const handleSubmit = (empty = false) => {
     const userInput = (function() {
-      if (!state.input || !card[currentCard] || !card[currentCard][0])
+      if (empty || !state.input || !card[currentCard] || !card[currentCard][0])
         return "skipped";
 
       if (card[currentCard][1].toLowerCase() === state.input.toLowerCase()) {
@@ -34,8 +34,8 @@ const WordInput = ({ card, currentCard, onSubmit }) => {
       return "wrong";
     })();
 
+    onSubmit([card[currentCard][0], empty ? "" : state.input, userInput]);
     setState({ input: "" });
-    onSubmit([card[currentCard][0], state.input || "", userInput]);
   };
 
   return (
@@ -58,12 +58,12 @@ const WordInput = ({ card, currentCard, onSubmit }) => {
       />
       <Grid container className={buttons}>
         <Button
-          onClick={handleSubmit}
+          onClick={() => handleSubmit(true)}
           style={{ backgroundColor: error, marginTop: 10 }}
         >
           Skip
         </Button>
-        <Button onClick={handleSubmit} style={{ marginTop: 10 }}>
+        <Button onClick={() => handleSubmit()} style={{ marginTop: 10 }}>
           {currentCard === card.length - 1 ? "Finish" : "Submit"}
         </Button>
       </Grid>
