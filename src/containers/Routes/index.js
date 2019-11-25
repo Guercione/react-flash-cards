@@ -1,8 +1,16 @@
 import React from "react";
 import Loadable from "react-loadable";
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+
+// REDUX
+import { connect } from "react-redux";
 
 // COMPONENTS
+import {
+  Route,
+  Switch,
+  BrowserRouter as Router,
+  Redirect
+} from "react-router-dom";
 import Header from "../Header";
 import Grid from "@material-ui/core/Grid";
 import Loading from "../../components/Loading";
@@ -66,7 +74,15 @@ const theme = createMuiTheme({
   }
 });
 
-const Routes = () => (
+const PrivateRoute = ({ condition, component, ...rest }) => {
+  if (condition) {
+    return <Route {...rest} component={component} />;
+  }
+
+  return <Redirect to="/" />;
+};
+
+const Routes = ({ selectedCard }) => (
   <MuiThemeProvider theme={theme}>
     <Router>
       <Header />
@@ -74,7 +90,12 @@ const Routes = () => (
         <Grid style={{ maxWidth: 1000, padding: "1em" }}>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/game" component={Game} />
+            <PrivateRoute
+              exact
+              path="/game"
+              condition={selectedCard !== undefined}
+              component={Game}
+            />
             <Route component={Error404} />
           </Switch>
         </Grid>
@@ -83,4 +104,8 @@ const Routes = () => (
   </MuiThemeProvider>
 );
 
-export default Routes;
+const mapStateToProps = state => ({
+  selectedCard: state.list.selectedCard
+});
+
+export default connect(mapStateToProps, {})(Routes);

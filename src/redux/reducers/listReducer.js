@@ -1,19 +1,16 @@
 import inicialData from "../../contants/inicialData";
 
 const initialState = {
-  cards: inicialData
+  cards: inicialData,
+  selectedCard: undefined
 };
 
 const list = (state = initialState, action) => {
   switch (action.type) {
-    case "SET_ERROR_MESSAGE":
+    case "SET_LIST_SELECTED_CARD":
       return {
         ...state,
-        snackBar: {
-          type: "error",
-          active: true,
-          message: action.message
-        }
+        selectedCard: action.cardNumber
       };
 
     default: {

@@ -1,5 +1,10 @@
 import React from "react";
 
+// REDUX
+import { connect } from "react-redux";
+import { setListSelectedCard } from "../../redux/actions/listAction";
+
+// COMPONENTS
 import Card from "../../components/Card";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,61 +17,47 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Cards = () => {
-  return data.map(item => (
-    <Grid container justify="center" key={item.title} item xs={12} md={6}>
-      <Card
-        title={item.title}
-        description={item.description}
-        image={item.image}
-      />
-    </Grid>
-  ));
-};
-
-const NoData = () => {
+const Home = ({ cards, setListSelectedCard }) => {
   const { noList } = useStyles();
 
-  return (
-    <Grid container direction="column" justify="center" className={noList}>
-      <Typography component="h5" variant="h5">
-        You have no created list
-      </Typography>
-      <Typography component="h6" variant="h6">
-        Click in "New List" to create a new one
-      </Typography>
-    </Grid>
-  );
+  const memoNoData = React.useMemo(() => {
+    return (
+      <Grid container direction="column" justify="center" className={noList}>
+        <Typography component="h5" variant="h5">
+          You have no created list
+        </Typography>
+        <Typography component="h6" variant="h6">
+          Click in "New List" to create a new one
+        </Typography>
+      </Grid>
+    );
+  }, []);
+
+  const memoCards = React.useMemo(() => {
+    return cards.map((item, key) => (
+      <Grid
+        key={item.title + key}
+        container
+        justify="center"
+        item
+        xs={12}
+        md={6}
+      >
+        <Card
+          title={item.title}
+          description={item.description}
+          image={item.image}
+          onClick={() => setListSelectedCard(key)}
+        />
+      </Grid>
+    ));
+  }, [cards]);
+
+  return <Grid container>{cards.length ? memoCards : memoNoData}</Grid>;
 };
 
-const Home = () => {
-  return <Grid container>{data.length ? Cards() : NoData()}</Grid>;
-};
+const mapStateToProps = state => ({
+  cards: state.list.cards
+});
 
-export default Home;
-
-const data = [
-  {
-    title: "Portuguese/Germany",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-aijEIDQtY5rE0kh5szpQ6kec8g3P-cFYBx4vFg0LVcfR96jp",
-    description: "Verbs list in Portuguese to German"
-  },
-  {
-    title: "English/Germany",
-    image:
-      "https://steemitimages.com/p/4qEixipsxSf25mGYKwnJMdnGEB67ASMcmmkyYu49eDZA8SnSEwKRSMUyziM3kHnNY6?format=match&mode=fit",
-    description: "Food list in English to German"
-  },
-  {
-    title: "English/Germany",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/c/ce/Flag_of_the_United_States_and_Germany.png",
-    description: "Vocabulary list in English to German"
-  },
-  {
-    title: "Portuguese/English",
-    image: "",
-    description: "General vocabulary list in English to German"
-  }
-];
+export default connect(mapStateToProps, { setListSelectedCard })(Home);

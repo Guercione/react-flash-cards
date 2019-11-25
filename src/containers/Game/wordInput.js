@@ -63,7 +63,7 @@ const WordInput = ({ card, currentCard, onSubmit }) => {
           Skip
         </Button>
         <Button onClick={handleSubmit} style={{ marginTop: 10 }}>
-          {currentCard === 19 ? "Finish" : "Submit"}
+          {currentCard === card.length - 1 ? "Finish" : "Submit"}
         </Button>
       </Grid>
     </Grid>

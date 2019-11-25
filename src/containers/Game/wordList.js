@@ -35,7 +35,7 @@ const typographyComponent = (ref, item, type = "", currentWord) => {
         maxWidth: 200
       }}
     >
-      {item && item.length === 0 && `${ref + 1}. ${currentWord} - ????`}
+      {item && item.length === 0 && `${ref + 1}. ???? - ????`}
       {item && item.length > 0 && `${ref + 1}. ${item[0]} - ${item[1]}`}
       {!item && `${ref + 1}. SKIPED`}
     </Typography>

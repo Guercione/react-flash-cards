@@ -33,19 +33,27 @@ export default [
     image:
       "https://steemitimages.com/p/4qEixipsxSf25mGYKwnJMdnGEB67ASMcmmkyYu49eDZA8SnSEwKRSMUyziM3kHnNY6?format=match&mode=fit",
     description: "Food list in English to German",
-    items: [["Voar", "Fliegen"]]
+    items: [
+      ["Fish", "Fisch"],
+      ["Rice", "Reis"],
+      ["Beans", "Bohnen"]
+    ]
   },
   {
     title: "English/Germany",
     image:
       "https://upload.wikimedia.org/wikipedia/commons/c/ce/Flag_of_the_United_States_and_Germany.png",
     description: "Vocabulary list in English to German",
-    items: []
+    items: [
+      ["Run", "Lauf"],
+      ["Walk", "Gehen"],
+      ["Eat", "Essen"]
+    ]
   },
   {
     title: "Portuguese/English",
     image: "",
-    description: "General vocabulary list in English to German",
+    description: "Uncomplete List",
     items: []
   }
 ];

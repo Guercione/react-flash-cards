@@ -37,13 +37,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Card = ({ title, description, image }) => {
+const Card = ({ title, description, image, onClick }) => {
   const classes = useStyles();
 
   return (
     <CardMUI className={classes.card}>
       <Link to="/game" className={classes.link}>
-        <CardActionArea className={classes.cardAction}>
+        <CardActionArea className={classes.cardAction} onClick={onClick}>
           <CardContent className={classes.content}>
             <Typography noWrap component="h5" variant="h5" color="primary">
               {title || "No title"}
