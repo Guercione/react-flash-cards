@@ -1,10 +1,10 @@
-# Default Project
+# Flash Card Project
 
 ## How to run
 
 - npm install / yarn
 - npm run start / yarn start
-- http://localhost:3003
+- http://localhost:3000
 
 ## How to build
 
@@ -15,4 +15,4 @@
 
 ### Version 1.0.0
 
-- Basic Structure
+- Basic Flash Card Game

@@ -1,13 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import CardMUI from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
+import CardActionArea from "@material-ui/core/CardActionArea";
 
 const useStyles = makeStyles(theme => ({
+  link: {
+    textDecoration: "none"
+  },
   card: {
     margin: "1em 0",
     width: "100%",
@@ -27,7 +31,7 @@ const useStyles = makeStyles(theme => ({
       maxWidth: 267
     }
   },
-  cover: {
+  image: {
     height: 95,
     width: 151
   }
@@ -38,21 +42,23 @@ const Card = ({ title, description, image }) => {
 
   return (
     <CardMUI className={classes.card}>
-      <CardActionArea className={classes.cardAction}>
-        <CardContent className={classes.content}>
-          <Typography noWrap component="h5" variant="h5">
-            {title || "No title"}
-          </Typography>
-          <Typography noWrap variant="subtitle1" color="textSecondary">
-            {description}
-          </Typography>
-        </CardContent>
-        <CardMedia
-          className={classes.cover}
-          image={image || "/images/empty-image.png"}
-          title={title || "Image"}
-        />
-      </CardActionArea>
+      <Link to="/game" className={classes.link}>
+        <CardActionArea className={classes.cardAction}>
+          <CardContent className={classes.content}>
+            <Typography noWrap component="h5" variant="h5" color="primary">
+              {title || "No title"}
+            </Typography>
+            <Typography noWrap variant="subtitle1" color="textSecondary">
+              {description}
+            </Typography>
+          </CardContent>
+          <CardMedia
+            className={classes.image}
+            image={image || "/images/empty-image.png"}
+            title={title || "Image"}
+          />
+        </CardActionArea>
+      </Link>
     </CardMUI>
   );
 };

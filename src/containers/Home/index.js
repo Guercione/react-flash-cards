@@ -1,6 +1,6 @@
 import React from "react";
 
-import Card from "../../components/card";
+import Card from "../../components/Card";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 
 const Cards = () => {
   return data.map(item => (
-    <Grid container justify="center" item xs={12} md={6}>
+    <Grid container justify="center" key={item.title} item xs={12} md={6}>
       <Card
         title={item.title}
         description={item.description}
@@ -47,27 +47,26 @@ export default Home;
 
 const data = [
   {
-    title: "Title",
-    image: "",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.s"
+    title: "Portuguese/Germany",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-aijEIDQtY5rE0kh5szpQ6kec8g3P-cFYBx4vFg0LVcfR96jp",
+    description: "Verbs list in Portuguese to German"
   },
   {
-    title: "Title",
-    image: "",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.s"
-  },
-  {
-    title: "Title",
-    image: "",
-    description: ""
+    title: "English/Germany",
+    image:
+      "https://steemitimages.com/p/4qEixipsxSf25mGYKwnJMdnGEB67ASMcmmkyYu49eDZA8SnSEwKRSMUyziM3kHnNY6?format=match&mode=fit",
+    description: "Food list in English to German"
   },
   {
     title: "English/Germany",
     image:
       "https://upload.wikimedia.org/wikipedia/commons/c/ce/Flag_of_the_United_States_and_Germany.png",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.s"
+    description: "Vocabulary list in English to German"
+  },
+  {
+    title: "Portuguese/English",
+    image: "",
+    description: "General vocabulary list in English to German"
   }
 ];

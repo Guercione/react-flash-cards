@@ -1,76 +1,41 @@
 import React from "react";
 
 // COMPONENTS
-import { primary, error } from "../color";
+import { secondary, error } from "../color";
 import TextField from "@material-ui/core/TextField";
-import withStyles from "@material-ui/core/styles/withStyles";
+import { makeStyles } from "@material-ui/core/styles";
 
-const styles = ({ breakpoints }) => ({
+const useStyles = makeStyles(theme => ({
   input: {
-    height: 50,
-    width: 280,
-    [breakpoints.up("sm")]: {
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
       width: 320
-    },
-    backgroundColor: "#ffffff",
-    border: "2px solid " + primary,
-    marginBottom: 0,
-    borderRadius: 4,
-    "&$error:after": {
-      borderBottomColor: error
-    },
-    "&:after": {
-      borderBottom: "2px solid " + primary
     }
   },
-  labels: {
-    "&$focusedLabel": {
-      color: "#ffffff"
-    },
-    "&$erroredLabel": {
-      color: error
-    }
-  },
+  labels: {},
   focusedLabel: {},
   erroredLabel: {},
   underline: {},
   error: {}
-});
+}));
 
-const TextInput = ({
-  type,
-  name,
-  width,
-  label,
-  value,
-  error,
-  margin,
-  classes,
-  onFocus,
-  required,
-  onChange,
-  disabled
-}) => (
-  <TextField
-    label={label}
-    name={name}
-    onFocus={onFocus ? onFocus : () => {}}
-    type={type ? type : "text"}
-    value={value || ""}
-    style={{ width: width, margin: margin ? margin : "10px 0" }}
-    disabled={disabled ? true : false}
-    onChange={disabled ? () => {} : onChange}
-    required={required}
-    variant="filled"
-    error={error}
-    InputLabelProps={{
-      classes: {
-        root: classes.labels,
-        focused: classes.focusedLabel,
-        error: classes.erroredLabel
-      }
-    }}
-  />
-);
+const TextInput = ({ type, margin, onFocus, onChange, ...rest }) => {
+  const classes = useStyles();
 
-export default withStyles(styles)(TextInput);
+  return (
+    <TextField
+      {...rest}
+      color="secondary"
+      variant="outlined"
+      onFocus={onFocus}
+      onChange={onChange}
+      type={type ? type : "text"}
+      style={{ margin: margin ? margin : "10px 0" }}
+      classes={{
+        root: classes.input
+      }}
+    />
+  );
+};
+
+export default TextInput;

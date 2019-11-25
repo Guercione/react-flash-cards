@@ -1,14 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
+// COMPONENTS
+import Fab from "@material-ui/core/Fab";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Fab from "@material-ui/core/Fab";
 
 const useStyles = makeStyles(theme => ({
   title: { flexGrow: 1 },
+  link: { textDecoration: "none", color: "#FFFFFF" },
   fab: {
     height: 40
   },
@@ -25,7 +28,9 @@ const Header = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
-          SITEJET CODE
+          <Link to="/" className={classes.link}>
+            SITEJET CODE
+          </Link>
         </Typography>
         <Fab
           edge="end"

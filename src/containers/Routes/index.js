@@ -6,7 +6,7 @@ import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Header from "../Header";
 import Grid from "@material-ui/core/Grid";
 import Loading from "../../components/Loading";
-import { primary, secondary } from "../../components/color";
+import { primary, secondary, grey } from "../../components/color";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 
@@ -28,6 +28,11 @@ const Home = Loadable({
   loading: loading
 });
 
+const Game = Loadable({
+  loader: () => import("../Game"),
+  loading: loading
+});
+
 const Error404 = Loadable({
   loader: () => import("../Errors/error404"),
   loading: loading
@@ -43,10 +48,14 @@ const theme = createMuiTheme({
     }
   },
   typography: {
+    color: "secondary",
     fontFamily: "Texta",
     useNextVariants: true,
     subtitle1: {
       color: primary
+    },
+    subtitle2: {
+      color: grey
     },
     body1: {
       color: "#000000"
@@ -59,13 +68,13 @@ const theme = createMuiTheme({
 
 const Routes = () => (
   <MuiThemeProvider theme={theme}>
-    <Header />
     <Router>
+      <Header />
       <Grid container justify="center">
         <Grid style={{ maxWidth: 1000, padding: "1em" }}>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/word-list" component={Home} />
+            <Route exact path="/game" component={Game} />
             <Route component={Error404} />
           </Switch>
         </Grid>
