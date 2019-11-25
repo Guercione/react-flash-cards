@@ -83,7 +83,7 @@ const ListItems = ({ list, setList }) => {
             </Typography>
             <TextInput
               name={`item-${key}`}
-              label="Word 1"
+              label="Word 2"
               error={item.error}
               value={item.word2}
               onChange={e => handleInput(e, key, "word2")}

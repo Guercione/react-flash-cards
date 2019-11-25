@@ -16,12 +16,12 @@ const SelectMode = () => (
   <Grid container direction="column">
     <Link to="/game" className={useStyles().link}>
       <Button color="primary" style={{ marginTop: 10 }}>
-        Jogar
+        Play
       </Button>
     </Link>
     <Link to="/list" className={useStyles().link}>
       <Button color="secondary" style={{ marginTop: 10 }}>
-        Editar
+        Edit
       </Button>
     </Link>
   </Grid>
