@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 // REDUX
 import { connect } from "react-redux";
@@ -14,7 +14,6 @@ import ListError from "./listError";
 import WordInput from "./wordInput";
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
-import Button from "../../components/inputs/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import ProgressBar from "../../components/ProgressBar";

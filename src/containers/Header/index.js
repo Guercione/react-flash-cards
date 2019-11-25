@@ -2,15 +2,15 @@ import React from "react";
 
 // COMPONENTS
 import Fab from "@material-ui/core/Fab";
-import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import AddBoxIcon from "@material-ui/icons/AddBox";
+import { Link, withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles(theme => ({
-  title: { flexGrow: 1 },
+  title: { flexGrow: 1, cursor: "pointer" },
   link: { textDecoration: "none", color: "#FFFFFF" },
   fab: {
     height: 40
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Header = () => {
+const Header = ({ location }) => {
   const classes = useStyles();
 
   return (
@@ -32,21 +32,23 @@ const Header = () => {
             SITEJET CODE
           </Link>
         </Typography>
-        <Link to="/new-list" className={classes.link}>
-          <Fab
-            edge="end"
-            variant="extended"
-            color="secondary"
-            aria-label="add"
-            className={classes.fab}
-          >
-            <AddBoxIcon className={classes.icon} />
-            <Typography variant="body2">New List</Typography>
-          </Fab>
-        </Link>
+        {location.pathname === "/" && (
+          <Link to="/list" className={classes.link}>
+            <Fab
+              edge="end"
+              variant="extended"
+              color="secondary"
+              aria-label="add"
+              className={classes.fab}
+            >
+              <AddBoxIcon className={classes.icon} />
+              <Typography variant="body2">New List</Typography>
+            </Fab>
+          </Link>
+        )}
       </Toolbar>
     </AppBar>
   );
 };
 
-export default Header;
+export default withRouter(Header);

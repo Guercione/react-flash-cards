@@ -1,17 +1,10 @@
 import React from "react";
 
-// REDUX
-import { connect } from "react-redux";
-import { setListSelectedCard } from "../../redux/actions/listAction";
-
 // COMPONENTS
-import { Link } from "react-router-dom";
 import Fab from "@material-ui/core/Fab";
 import Grid from "@material-ui/core/Grid";
 import { error } from "../../components/color";
-import Divider from "@material-ui/core/Divider";
 import AddBoxIcon from "@material-ui/icons/AddBox";
-import Button from "../../components/inputs/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import TextInput from "../../components/inputs/TextInput";
@@ -130,4 +123,4 @@ const ListItems = ({ list, setList }) => {
   );
 };
 
-export default connect(null, {})(ListItems);
+export default ListItems;

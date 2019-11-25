@@ -42,8 +42,13 @@ const Game = Loadable({
   loading: loading
 });
 
-const NewList = Loadable({
-  loader: () => import("../NewList"),
+const List = Loadable({
+  loader: () => import("../List"),
+  loading: loading
+});
+
+const SelectMode = Loadable({
+  loader: () => import("../SelectMode"),
   loading: loading
 });
 
@@ -90,14 +95,20 @@ const PrivateRoute = ({ condition, component, ...rest }) => {
 
 const Routes = ({ selectedCard }) => (
   <MuiThemeProvider theme={theme}>
-      <Router>
-    <GeneralError>
+    <Router>
+      <GeneralError>
         <Header />
         <Grid container justify="center">
           <Grid style={{ maxWidth: 1000, padding: "1em" }}>
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route exact path="/new-list" component={NewList} />
+              <Route exact path="/list" component={List} />
+              <PrivateRoute
+                exact
+                path="/mode"
+                condition={selectedCard !== undefined}
+                component={SelectMode}
+              />
               <PrivateRoute
                 exact
                 path="/game"
@@ -108,8 +119,8 @@ const Routes = ({ selectedCard }) => (
             </Switch>
           </Grid>
         </Grid>
-    </GeneralError>
-      </Router>
+      </GeneralError>
+    </Router>
   </MuiThemeProvider>
 );
 

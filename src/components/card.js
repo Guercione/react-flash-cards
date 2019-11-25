@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
+// COMPONENTS
+import { Link } from "react-router-dom";
 import CardMUI from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
@@ -42,7 +43,7 @@ const Card = ({ title, description, image, onClick }) => {
 
   return (
     <CardMUI className={classes.card}>
-      <Link to="/game" className={classes.link}>
+      <Link to="/mode" className={classes.link}>
         <CardActionArea className={classes.cardAction} onClick={onClick}>
           <CardContent className={classes.content}>
             <Typography noWrap component="h5" variant="h5" color="primary">

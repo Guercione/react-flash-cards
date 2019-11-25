@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { setListSelectedCard } from "../../redux/actions/listAction";
 
 // COMPONENTS
+import { withRouter } from "react-router-dom";
+
 import Card from "../../components/Card";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,8 +19,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Home = ({ cards, setListSelectedCard }) => {
+const Home = ({ cards, location, setListSelectedCard }) => {
   const { noList } = useStyles();
+
+  const setList = React.useCallback(() => setListSelectedCard(), [
+    location.pathname
+  ]);
+
+  setList();
 
   const memoNoData = React.useMemo(() => {
     return (
@@ -60,4 +68,6 @@ const mapStateToProps = state => ({
   cards: state.list.cards
 });
 
-export default connect(mapStateToProps, { setListSelectedCard })(Home);
+export default connect(mapStateToProps, { setListSelectedCard })(
+  withRouter(Home)
+);
